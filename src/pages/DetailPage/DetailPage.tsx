@@ -8,7 +8,7 @@ import './DetailPage.scss'
 const DetailPage: React.FC = () => {
     return (
 
-        <main>
+        <>
             <div className="container">
                 <NavLink to='/' exact>
                     <div className='flex-start align-center btn-back'>
@@ -45,7 +45,7 @@ const DetailPage: React.FC = () => {
                 </div>
             </div>
 
-        </main>
+        </>
 
     );
 }

@@ -99,6 +99,37 @@ ul{
     }
 }
 
+.btn-briefcase {
+  position: fixed;
+  left: 20px;
+  bottom: 80px;
+  border-radius: 50%;
+  padding: 20px;
+  text-align: center;
+  background: rgba(0, 102, 255, 0.1);
+  transition: 0.5s all ease;
+  z-index: 2;
+
+  svg {
+    width: 25px;
+    min-width: 25px;
+    height: 22px;
+    path {
+      fill: #0066ff;
+    }
+  }
+
+  &:hover{
+    background: #0066ff;
+    svg {
+
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
+
+}
 @media (max-width: 767px) {
   h1 {
     font-size: 1.5rem;

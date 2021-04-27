@@ -6,7 +6,7 @@ import {Button} from "react-bootstrap";
 const MainPage: React.FC = () => {
     return (
 
-            <main>
+            <>
                 <div className="container">
                     <h1>Cryptocurrencies list</h1>
                     <div className='crypto-list'>
@@ -49,7 +49,7 @@ const MainPage: React.FC = () => {
                     </div>
                 </div>
 
-            </main>
+            </>
 
     );
 }
