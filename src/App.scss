@@ -27,6 +27,7 @@ h1, h2, h3{
   font-family: 'Russo One', sans-serif;
   font-weight: 400;
   letter-spacing: 2px;
+  text-transform: capitalize;
 }
 h1{
   text-align: center;
@@ -68,6 +69,7 @@ h1{
 main{
   min-height: calc(100vh - 132px);
   height: 100%;
+  padding-bottom: 60px;
 }
 ul{
   padding-left: 0;
@@ -128,8 +130,9 @@ ul{
       }
     }
   }
-
 }
+
+
 @media (max-width: 767px) {
   h1 {
     font-size: 1.5rem;

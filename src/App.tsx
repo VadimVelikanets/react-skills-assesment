@@ -22,20 +22,24 @@ interface ICryptoCurrency {
 
 interface appProps {
     store: {};
+    state: {
+        currencies: []
+    }
 }
 
-const App: React.FC<appProps> = ({store}) => {
+const App: React.FC<appProps> = ({store, state}) => {
   const dispatch = useDispatch()
   const [isShowBriefcasePopup, setShowBriefcasePopup] = useState<boolean>(false)
-    useEffect(() => {
+  const [currencyArr, setCurrencyArr] = useState<[]>([])
 
+    useEffect(() => {
         axios.get<any>('https://api.coincap.io/v2/assets')
             .then(response => {
-                console.log(response.data.data);
+
                 dispatch(addCurrency({currencies: response.data.data}))
+                console.log(state);
+                setCurrencyArr(state.currencies)
             });
-
-
     }, []);
 
   //Show briefcase popup handler
@@ -57,10 +61,10 @@ const App: React.FC<appProps> = ({store}) => {
             <main>
                 <Switch>
                     <Route path="/" exact>
-                        <MainPage/>
+                        <MainPage  currencies={currencyArr} />
                     </Route>
-                    <Route path="/detail" >
-                        <DetailPage />
+                    <Route path="/:id" >
+                        <DetailPage currencies={currencyArr}  />
                     </Route>
                 </Switch>
                 <a href="#"

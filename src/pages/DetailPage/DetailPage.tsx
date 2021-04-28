@@ -1,11 +1,49 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import './DetailPage.scss'
-const DetailPage: React.FC = () => {
+
+interface detailPageProps {
+    currencies: []
+}
+const DetailPage: React.FC<detailPageProps> = ({currencies}) => {
+    const id: number  = Number(window.location.pathname.replace('/', ''));
+    interface currencyTypes{
+        id: number | string;
+        rank: number | string;
+        symbol: string;
+        name: string;
+        supply: number | string;
+        maxSupply: number | string;
+        marketCapUsd: number | string;
+        volumeUsd24Hr: number | string;
+        priceUsd: number | string;
+        changePercent24Hr: number | string;
+        vwap24Hr: number | string;
+    }
+    const [currencyItem, setCurrencyItem] = useState<currencyTypes>({
+        id: '',
+        rank: '',
+        symbol: '',
+        name: '',
+        supply: '',
+        maxSupply: '',
+        marketCapUsd: '',
+        volumeUsd24Hr: '',
+        priceUsd: '',
+        changePercent24Hr: '',
+        vwap24Hr: ''
+    })
+    useEffect(() => {
+
+        setCurrencyItem(currencies[id])
+        console.log(currencyItem)
+    }, []);
+
+
     return (
 
         <>
@@ -15,33 +53,30 @@ const DetailPage: React.FC = () => {
                         <FontAwesomeIcon icon={faArrowLeft} /><h3>Return to list</h3>
                     </div>
                 </NavLink>
-                <h1>Bitcoin (BTC)</h1>
+                <h1>{currencyItem.id}  ({currencyItem.symbol})</h1>
                 <div className="currency-item">
-                    <b>Rank:</b> 1
+                    <b>Rank:</b> {currencyItem.rank}
                 </div>
                 <div className="currency-item">
-                    <b>supply:</b> 1
+                    <b>supply:</b> {currencyItem.supply}
                 </div>
                 <div className="currency-item">
-                    <b>Rank:</b> 17193925.0000000000000000
+                    <b>maxSupply:</b> {currencyItem.maxSupply}
                 </div>
                 <div className="currency-item">
-                    <b>maxSupply:</b> 21000000.0000000000000000
+                    <b>marketCapUsd:</b> {currencyItem.marketCapUsd}
                 </div>
                 <div className="currency-item">
-                    <b>marketCapUsd:</b> 119179791817.6740161068269075
+                    <b>volumeUsd24Hr:</b> {currencyItem.volumeUsd24Hr}
                 </div>
                 <div className="currency-item">
-                    <b>volumeUsd24Hr:</b> 2928356777.6066665425687196
+                    <b>priceUsd:</b> {currencyItem.priceUsd}
                 </div>
                 <div className="currency-item">
-                    <b>priceUsd:</b> 6931.5058555666618359
+                    <b>changePercent24Hr:</b> {currencyItem.changePercent24Hr}
                 </div>
                 <div className="currency-item">
-                    <b>changePercent24Hr:</b> -0.8101417214350335
-                </div>
-                <div className="currency-item">
-                    <b>vwap24Hr:</b> 7175.0663247679233209
+                    <b>vwap24Hr:</b> {currencyItem.vwap24Hr}
                 </div>
             </div>
 

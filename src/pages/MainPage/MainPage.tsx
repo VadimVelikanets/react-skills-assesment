@@ -3,48 +3,50 @@ import {NavLink} from "react-router-dom";
 
 import {Button} from "react-bootstrap";
 
-const MainPage: React.FC = () => {
+interface mainPageProps {
+    currencies: []
+}
+const MainPage: React.FC<mainPageProps> = ({currencies}) => {
+    const currItems = currencies.map((item:any, index) =>{
+        const link = "/" + index;
+        return(
+            <tr key={index}>
+                <td><NavLink to={link}>{item.symbol}</NavLink></td>
+                <td><NavLink to={link}>{item.id}</NavLink></td>
+                <td><NavLink to={link}>{item.priceUsd}</NavLink></td>
+                <td><NavLink to={link}>{item.changePercent24Hr}</NavLink></td>
+                <td>
+                    <Button variant="dark">+ Add</Button>
+                </td>
+            </tr>
+        )
+    }
+
+
+    );
     return (
 
             <>
                 <div className="container">
                     <h1>Cryptocurrencies list</h1>
+
                     <div className='crypto-list'>
                         <table>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>name</th>
-                                <th>price	</th>
-                                <th>change</th>
-                                <th>in case</th>
-                            </tr>
-                            <tr>
-                                <td><NavLink to="/detail/">BTC</NavLink></td>
-                                <td><NavLink to="/detail/">Bitcoin</NavLink></td>
-                                <td><NavLink to="/detail/">6929.82</NavLink></td>
-                                <td><NavLink to="/detail/">-0.81</NavLink></td>
-                                <td>
-                                    <Button variant="dark">+ Add</Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><NavLink to="/detail/">ETH</NavLink></td>
-                                <td><NavLink to="/detail/">Ethereum</NavLink></td>
-                                <td><NavLink to="/detail/">6929.82</NavLink></td>
-                                <td><NavLink to="/detail/">-0.81</NavLink></td>
-                                <td>
-                                    <Button variant="dark">+ Add</Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><NavLink to="/detail/">XRP</NavLink></td>
-                                <td><NavLink to="/detail/">XRP</NavLink></td>
-                                <td><NavLink to="/detail/">6929.82</NavLink></td>
-                                <td><NavLink to="/detail/">-0.81</NavLink></td>
-                                <td>
-                                    <Button variant="dark">+ Add</Button>
-                                </td>
-                            </tr>
+
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>name</th>
+                                    <th>price	</th>
+                                    <th>change</th>
+                                    <th>in case</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            {currItems && currItems}
+                            </tbody>
+
                         </table>
                     </div>
                 </div>
