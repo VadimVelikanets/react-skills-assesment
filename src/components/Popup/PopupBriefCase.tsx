@@ -19,6 +19,8 @@ export const PopupBriefCase: React.FC<PopupBriefCaseProps> = (props) => {
                 <a href="#" className='btn-close-popup' onClick={ props.hideBriefcasePopupHandler}>
                     <FontAwesomeIcon icon={faTimes}/>
                 </a>
+                <div><b>Your briefcases:</b></div>
+
                 <div className="briefcase-item flex-between">
                     <span>Bitcoin (BTC)</span>
                     <button className='btn-remove'>

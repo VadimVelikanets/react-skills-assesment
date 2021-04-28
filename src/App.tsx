@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route,} from "react-router-dom";
 import axios, {AxiosResponse} from 'axios';
 import 'bootstrap/scss/bootstrap.scss';
 import './App.scss';
-
+import {useDispatch} from "react-redux";
 import {Header} from "./components/Header/Header";
 import {Footer} from "./components/Footer/Footer";
 import MainPage from "./pages/MainPage/MainPage";
@@ -11,34 +11,31 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import {PopupBriefCase} from "./components/Popup/PopupBriefCase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons'
+import {addCurrency} from "./store/actions/actionCreater";
+
 
 //interface cryptocurrency item
+
 interface ICryptoCurrency {
-    id: string;
-    rank: string;
-    symbol: string;
-    name: string;
-    supply: string;
-    maxSupply: string;
-    marketCapUsd: string;
-    volumeUsd24Hr: string;
-    priceUsd: string;
-    changePercent24Hr: string;
-    vwap24Hr: string;
+    currencies: []
 }
 
-const App: React.FC = () => {
+interface appProps {
+    store: {};
+}
 
-  const [cryptoCurrencies, setCryptoCurrencies] =   useState<ICryptoCurrency[]>([]);
+const App: React.FC<appProps> = ({store}) => {
+  const dispatch = useDispatch()
   const [isShowBriefcasePopup, setShowBriefcasePopup] = useState<boolean>(false)
-
     useEffect(() => {
 
-        axios.get<ICryptoCurrency[]>('https://api.coincap.io/v2/assets')
+        axios.get<any>('https://api.coincap.io/v2/assets')
             .then(response => {
-                console.log(response.data);
-                setCryptoCurrencies( response.data );
+                console.log(response.data.data);
+                dispatch(addCurrency({currencies: response.data.data}))
             });
+
+
     }, []);
 
   //Show briefcase popup handler
