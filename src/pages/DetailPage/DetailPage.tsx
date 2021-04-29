@@ -9,6 +9,7 @@ import './DetailPage.scss'
 interface detailPageProps {
     currencies: []
 }
+
 const DetailPage: React.FC<detailPageProps> = ({currencies}) => {
     const id: number  = Number(window.location.pathname.replace('/', ''));
     interface currencyTypes{

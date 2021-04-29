@@ -57,7 +57,7 @@ const App: React.FC<appProps> = ({store, state}) => {
             <PopupBriefCase hideBriefcasePopupHandler={(e) => hideBriefcasePopup(e)}/>
         }
      <Router>
-         <Header/>
+         <Header currencies={currencyArr}/>
             <main>
                 <Switch>
                     <Route path="/" exact>
