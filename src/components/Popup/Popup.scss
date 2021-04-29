@@ -34,3 +34,18 @@
 .briefcase-item {
   margin-top: 20px;
 }
+
+.add-briefcase{
+  text-align: center;
+  input{
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px #C1C1C1 solid;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 30px;
+  }
+}
