@@ -60,6 +60,11 @@ const App: React.FC<appProps> = ({store, state}) => {
         setShowAddBriefcasePopup(true)
     };
 
+    const briefcaseHandler = (currencyItem: object, inputValue: number | string): any => {
+        console.log(currencyItem, inputValue)
+        setShowAddBriefcasePopup(false)
+    }
+
   return (
     <div className="App">
         {isShowBriefcasePopup &&
@@ -68,6 +73,7 @@ const App: React.FC<appProps> = ({store, state}) => {
         }
         {isShowAddBriefcasePopup &&
             <PopupAddBriefCase
+                briefcaseHandler={briefcaseHandler}
                 currencies={currencyArr}
                 selectedBriefCase={selectedBriefCase}
                 hideBriefcasePopupHandler={(e) => hideBriefcasePopup(e)}/>

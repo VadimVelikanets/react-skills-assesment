@@ -10,8 +10,12 @@ interface PopupBriefCaseProps {
     hideBriefcasePopupHandler: (e:  React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => void;
     selectedBriefCase: number;
     currencies:  [];
+    briefcaseHandler: IFormatter
 }
-export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcasePopupHandler, selectedBriefCase, currencies}) => {
+interface IFormatter {
+    (currencyItem: object, inputValue : number | string): void;
+};
+export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcasePopupHandler, selectedBriefCase, currencies, briefcaseHandler}) => {
 
     interface currencyTypes{
         id: number | string;
@@ -39,11 +43,14 @@ export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcaseP
         changePercent24Hr: '',
         vwap24Hr: ''
     })
-
+    const [currencyName, setCurrencyName] = useState<string | number>('')
     useEffect(() => {
 
         setCurrencyItem(currencies[selectedBriefCase])
         console.log(currencyItem)
+        setCurrencyName(currencyItem.id)
+
+
     }, []);
 
     const [inputValue, setInputValue] = useState<string | number>('')
@@ -54,7 +61,6 @@ export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcaseP
 
         if (e.currentTarget.value === '' || re.test(e.currentTarget.value)) {
             setInputValue(e.currentTarget.value)
-            console.log(e.currentTarget.value)
         }
 
     }
@@ -77,7 +83,10 @@ export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcaseP
                         <input value={inputValue} onChange={onChangeHandler} type="text" placeholder='Select quantity (1,99 example)'/>
                     </div>
 
-                    <Button variant="info" size="lg" active>
+                    <Button
+                        onClick={() => briefcaseHandler(currencyItem, inputValue)}
+                        variant="info" size="lg" active
+                    >
                         +ADD
                     </Button>
                 </div>
