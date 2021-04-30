@@ -1,0 +1,18 @@
+.pagination{
+  a{
+    display: block;
+    margin: 20px 10px;
+    font-weight: bold;
+    background: #20232a;
+    padding: 10px;
+    color: #fff;
+    border-radius: 15px;
+    min-width: 50px;
+    text-align: center;
+    transition: 0.5 all ease;
+
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+}

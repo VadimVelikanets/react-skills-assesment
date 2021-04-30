@@ -1,14 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 
 import {Button} from "react-bootstrap";
-
+import {Pagination} from "../../components/Pagination/Pagination";
+import {addNewBriefcase} from "../../store/actions/actionBriefcaseCreater";
 interface mainPageProps {
-    currencies: [];
+    currencies: any | [];
     addBriefcaseHandler: ( index: number) => number;
 }
 const MainPage: React.FC<mainPageProps> = ({currencies, addBriefcaseHandler}) => {
-    const currItems = currencies.map((item:any, index) =>{
+
+    const [posts, setPosts] = useState<[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [postsPerPage] = useState<number>(10);
+
+
+    const changePageHander = (selectedPage: number): any => {
+
+        console.log(selectedPage)
+        setCurrentPage(selectedPage)
+
+    }
+
+    const indexOfLastPost: number = currentPage * postsPerPage;
+    const indexOfFirstPost: number = indexOfLastPost - postsPerPage;
+    const currentPosts: [] = currencies.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Change page
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+    const currItems = currentPosts.map((item:any, index: any) =>{
         const link = "/" + index;
 
         return(
@@ -51,6 +73,7 @@ const MainPage: React.FC<mainPageProps> = ({currencies, addBriefcaseHandler}) =>
 
                         </table>
                     </div>
+                    <Pagination changePageHander={changePageHander} />
                 </div>
 
             </>

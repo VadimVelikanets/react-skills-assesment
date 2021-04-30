@@ -29,10 +29,10 @@ const App: React.FC = () => {
   const [isShowBriefcasePopup, setShowBriefcasePopup] = useState<boolean>(false)
   const [isShowAddBriefcasePopup, setShowAddBriefcasePopup] = useState<boolean>(false)
   const [selectedBriefCase, setSelectedBriefCase] = useState<number>(0)
-  const [apiUrl, setApiUrl] = useState<string>('https://api.coincap.io/v2/assets')
+
 
     useEffect(() => {
-        axios.get<any>(apiUrl)
+        axios.get<any>('https://api.coincap.io/v2/assets')
             .then(response => {
 
                 dispatch(addCurrency({currencies: response.data.data}))
@@ -65,10 +65,7 @@ const App: React.FC = () => {
         }
 
     }
-    const apiChangeUrl = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        setApiUrl('https://api.coincap.io/v2/assets?limit=7')
 
-    }
   return (
     <div className="App">
         {isShowBriefcasePopup &&
@@ -86,7 +83,6 @@ const App: React.FC = () => {
      <Router>
          <Header currencies={currencyArr}/>
             <main>
-                <a href="#" onClick={apiChangeUrl}>click</a>
                 <Switch>
                     <Route path="/" exact>
                         <MainPage
