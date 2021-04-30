@@ -1,9 +1,9 @@
 import React, {useEffect, useState } from 'react';
-import {BrowserRouter as Router, Switch, Route, useHistory} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import axios, {AxiosResponse} from 'axios';
 import 'bootstrap/scss/bootstrap.scss';
 import './App.scss';
-import {connect, useDispatch} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {Header} from "./components/Header/Header";
 import {Footer} from "./components/Footer/Footer";
 import MainPage from "./pages/MainPage/MainPage";
@@ -14,32 +14,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons'
 import {addCurrency} from "./store/actions/actionCurrencyCreater";
 import {addNewBriefcase} from './store/actions/actionBriefcaseCreater'
-import {hydrate} from "react-dom";
 
-
-//interface cryptocurrency item
-
-interface ICryptoCurrency {
-    currencies: []
+interface RootState {
+    currencies: [];
+    briefcases: [];
 }
 
-interface appProps {
-    store: {};
-    state: {
-        currencies: [],
-        briefcases: []
-    }
-}
-
-const App: React.FC<appProps> = ({store, state}) => {
+const App: React.FC = () => {
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const briefcases = useSelector((state:  RootState)=> state.briefcases);
+  const currencyArr = useSelector((state:  RootState)=> state.currencies);
+
   const [isShowBriefcasePopup, setShowBriefcasePopup] = useState<boolean>(false)
   const [isShowAddBriefcasePopup, setShowAddBriefcasePopup] = useState<boolean>(false)
-  const [currencyArr, setCurrencyArr] = useState<[]>([])
   const [selectedBriefCase, setSelectedBriefCase] = useState<number>(0)
-  const [briefcases, setBriefcases] = useState<[]>([])
   const [apiUrl, setApiUrl] = useState<string>('https://api.coincap.io/v2/assets')
 
     useEffect(() => {
@@ -48,16 +37,9 @@ const App: React.FC<appProps> = ({store, state}) => {
 
                 dispatch(addCurrency({currencies: response.data.data}))
 
-                setCurrencyArr(state.currencies)
-                setBriefcases(state.briefcases)
-
             });
     }, []);
 
-    useEffect(() => {
-        setBriefcases(state.briefcases)
-        console.log(state.briefcases);
-    }, [])
   //Show briefcase popup handler
   const showBriefcasePopup = (e: React.MouseEvent<HTMLAnchorElement>) =>{
     setShowBriefcasePopup(true)
@@ -85,7 +67,7 @@ const App: React.FC<appProps> = ({store, state}) => {
     }
     const apiChangeUrl = (e: React.MouseEvent<HTMLAnchorElement>) => {
         setApiUrl('https://api.coincap.io/v2/assets?limit=7')
-     //   history.push('/');
+
     }
   return (
     <div className="App">
@@ -104,7 +86,7 @@ const App: React.FC<appProps> = ({store, state}) => {
      <Router>
          <Header currencies={currencyArr}/>
             <main>
-                {/*<a href="#" onClick={apiChangeUrl}>click</a>*/}
+                <a href="#" onClick={apiChangeUrl}>click</a>
                 <Switch>
                     <Route path="/" exact>
                         <MainPage
@@ -131,5 +113,3 @@ const App: React.FC<appProps> = ({store, state}) => {
 }
 
 export default App;
-
-// export default connect((null), { addNewBriefcase })(App);

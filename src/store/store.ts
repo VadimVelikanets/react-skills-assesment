@@ -39,6 +39,9 @@ const store = createStoreWithMiddleware(
     load({ namespace: 'cryptocurrencies' }) // Loading done here
 )
 
+
+export type StoreType = typeof store;
+
 declare global {
     interface Window { store: any; }
 }

@@ -10,7 +10,6 @@ type stateCurrencies = [];
 
 const savedCurrencies: any = load({ namespace: 'cryptocurrencies' });
 
-//const initialState: [] = (savedCurrencies && savedCurrencies.currencies) ? savedCurrencies.currencies : [];
 const initialState: [] =  [];
 
 const currencies = (state = initialState, action: TaskCurrencyTypes): any => {

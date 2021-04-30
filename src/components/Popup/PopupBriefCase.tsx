@@ -4,8 +4,7 @@ import React, {useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Popup.scss'
-import {NavLink} from "react-router-dom";
-import {Button} from "react-bootstrap";
+
 import {useDispatch} from "react-redux";
 import {deleteBriefcase} from "../../store/actions/actionBriefcaseCreater";
 interface PopupBriefCaseProps {
@@ -42,7 +41,9 @@ export const PopupBriefCase: React.FC<PopupBriefCaseProps> = ({briefcases, hideB
 
                 <div><b>Your briefcases:</b></div>
 
-                {briefcaseItems}
+                {briefcaseItems.length > 0 ? briefcaseItems:
+                    (<div>Briefcases not found</div>)
+                }
             </div>
         </>
     )
