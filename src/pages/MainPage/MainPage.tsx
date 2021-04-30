@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLongArrowAltUp, faLongArrowAltDown } from '@fortawesome/free-solid-svg-icons'
 import {Button} from "react-bootstrap";
 import {Pagination} from "../../components/Pagination/Pagination";
 import {addNewBriefcase} from "../../store/actions/actionBriefcaseCreater";
@@ -38,7 +39,24 @@ const MainPage: React.FC<mainPageProps> = ({currencies, addBriefcaseHandler}) =>
                 <td><NavLink to={link}>{item.symbol}</NavLink></td>
                 <td><NavLink to={link}>{item.id}</NavLink></td>
                 <td><NavLink to={link}>{item.priceUsd}</NavLink></td>
-                <td><NavLink to={link}>{item.changePercent24Hr}</NavLink></td>
+                {Number(item.changePercent24Hr) > 0 ?
+                    (<td><NavLink to={link}>
+                        <FontAwesomeIcon icon={faLongArrowAltUp}/>
+                        <span>
+                            {item.changePercent24Hr}
+                        </span>
+
+                    </NavLink></td>)
+                    :
+                    (<td><NavLink to={link}>
+                        <FontAwesomeIcon icon={faLongArrowAltDown}/>
+                        <span>
+                            {item.changePercent24Hr}
+                        </span>
+
+                    </NavLink></td>)
+                }
+
                 <td>
                     <Button variant="dark" onClick={() => addBriefcaseHandler( index)}>+ Add</Button>
                 </td>

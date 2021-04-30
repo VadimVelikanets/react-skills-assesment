@@ -98,6 +98,7 @@ const App: React.FC = () => {
                    onClick={showBriefcasePopup}
                 >
                     <FontAwesomeIcon icon={faBriefcase}/>
+                    <span className='briefcase-count'>{briefcases && briefcases.length}</span>
                 </a>
             </main>
 

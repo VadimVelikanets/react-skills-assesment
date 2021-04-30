@@ -2,7 +2,7 @@ import React from 'react'
 import './Pagination.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 
 interface PaginationProps {
     changePageHander: IPages
@@ -17,7 +17,9 @@ export const Pagination: React.FC<PaginationProps> = ({changePageHander}) => {
         <div className="pagination flex">
             <a
                 onClick={() => changePageHander(1)}
-                href="#" > start </a>
+                href="#" >
+                <FontAwesomeIcon icon={faAngleDoubleLeft}/>
+            </a>
             <a
                 onClick={() => changePageHander(1)}
                 href="#">1</a>
@@ -35,7 +37,9 @@ export const Pagination: React.FC<PaginationProps> = ({changePageHander}) => {
                 href="#">5</a>
             <a
                 onClick={() => changePageHander(6)}
-                href="#">finish</a>
+                href="#">
+                <FontAwesomeIcon icon={faAngleDoubleRight}/>
+            </a>
         </div>
     )
 }
