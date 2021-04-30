@@ -78,7 +78,7 @@ const App: React.FC<appProps> = ({store, state}) => {
         if(inputValue != ''){
             dispatch(addNewBriefcase(currencyName, inputValue))
             setShowAddBriefcasePopup(false)
-            window.location.reload();
+           // window.location.reload();
 
         }
 
@@ -104,7 +104,7 @@ const App: React.FC<appProps> = ({store, state}) => {
      <Router>
          <Header currencies={currencyArr}/>
             <main>
-                <a href="#" onClick={apiChangeUrl}>click</a>
+                {/*<a href="#" onClick={apiChangeUrl}>click</a>*/}
                 <Switch>
                     <Route path="/" exact>
                         <MainPage

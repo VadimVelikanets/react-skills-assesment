@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
-import { save } from 'redux-localstorage-simple'
+import { save, load } from 'redux-localstorage-simple'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers =
@@ -10,19 +10,34 @@ const composeEnhancers =
         (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 /* eslint-enable */
 
-const configureStore = (preloadedState: any) => (
-    createStore(
-        rootReducer,
-        preloadedState,
-        composeEnhancers(
-            applyMiddleware(save({ namespace: 'cryptocurrencies' }))
-        ),
-    )
-);
+// const configureStore = (preloadedState: any) => (
+//     createStore(
+//         rootReducer,
+//         preloadedState,
+//         composeEnhancers(
+//             applyMiddleware(
+//                 save({ namespace: 'cryptocurrencies' }),
+//
+//             )
+//         ),
+//     )
+// );
+//
+// const store = configureStore(load({ namespace: 'cryptocurrencies' }) );
 
-const store = configureStore({});
+const createStoreWithMiddleware
+    = applyMiddleware(
+    save({ namespace: 'cryptocurrencies' }) // Saving done here
+)(createStore)
 
-
+/*
+    Loading from LocalStorage happens during
+    creation of the Redux store.
+*/
+const store = createStoreWithMiddleware(
+    rootReducer,
+    load({ namespace: 'cryptocurrencies' }) // Loading done here
+)
 
 declare global {
     interface Window { store: any; }

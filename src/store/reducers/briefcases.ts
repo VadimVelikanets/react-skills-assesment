@@ -1,6 +1,6 @@
 import {  ADD_BRIEFCASE, DELETE_BRIEFCASE } from '../../constants';
 
-import { load } from 'redux-localstorage-simple';
+import { load, save } from 'redux-localstorage-simple';
 
 import { TaskBriefCasesTypes } from '../../types';
 
@@ -13,7 +13,8 @@ interface IBriefcase {
 
 }
 
-const initialState: Array<IBriefcase> = (briefCurrencies && briefCurrencies.briefcases) ? briefCurrencies.briefcases : [];
+//const initialState: Array<IBriefcase> = (briefCurrencies && briefCurrencies.briefcases) ? briefCurrencies.briefcases : [];
+const initialState: Array<IBriefcase> =  [];
 
 
 const briefcases = (state = initialState, action: TaskBriefCasesTypes): any => {
