@@ -10,21 +10,6 @@ const composeEnhancers =
         (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 /* eslint-enable */
 
-// const configureStore = (preloadedState: any) => (
-//     createStore(
-//         rootReducer,
-//         preloadedState,
-//         composeEnhancers(
-//             applyMiddleware(
-//                 save({ namespace: 'cryptocurrencies' }),
-//
-//             )
-//         ),
-//     )
-// );
-//
-// const store = configureStore(load({ namespace: 'cryptocurrencies' }) );
-
 const createStoreWithMiddleware
     = applyMiddleware(
     save({ namespace: 'cryptocurrencies' }) // Saving done here
