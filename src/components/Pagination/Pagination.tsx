@@ -14,7 +14,7 @@ interface IPages {
 
 export const Pagination: React.FC<PaginationProps> = ({changePageHander}) => {
     return (
-        <div className="pagination flex">
+        <div className="pagination flex flex-wrap">
             <a
                 onClick={() => changePageHander(1)}
                 href="#" >
