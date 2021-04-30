@@ -11,9 +11,6 @@ const MainPage: React.FC<mainPageProps> = ({currencies, addBriefcaseHandler}) =>
     const currItems = currencies.map((item:any, index) =>{
         const link = "/" + index;
 
-    // const addBriefcaseHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //
-    // }
         return(
             <tr key={index}>
                 <td><NavLink to={link}>{item.symbol}</NavLink></td>

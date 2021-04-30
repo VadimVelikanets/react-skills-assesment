@@ -1,44 +1,48 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Popup.scss'
-
+import {NavLink} from "react-router-dom";
+import {Button} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {deleteBriefcase} from "../../store/actions/actionBriefcaseCreater";
 interface PopupBriefCaseProps {
     hideBriefcasePopupHandler: (e:  React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => void;
+    briefcases: object[]
 }
-export const PopupBriefCase: React.FC<PopupBriefCaseProps> = (props) => {
 
+export const PopupBriefCase: React.FC<PopupBriefCaseProps> = ({briefcases, hideBriefcasePopupHandler}) => {
+    const dispatch = useDispatch()
+    const deleteBriefcaseHandler = (value: string): any => {
+        dispatch(deleteBriefcase(value))
+    }
+    const briefcaseItems = briefcases.map((item:any, index) =>{
 
-
+        return(
+        <div className="briefcase-item flex-between" key={index}>
+            <span>{item.title} ({item.quantity})</span>
+            <button className='btn-remove' onClick={() => deleteBriefcaseHandler(item.title)}>
+                <FontAwesomeIcon icon={faTrashAlt}/>
+            </button>
+        </div>
+        )
+    })
+    useEffect(() => {
+        console.log(briefcases, 'br')
+    }, [])
     return(
         <>
-            <div className="popup-container" onClick={ props.hideBriefcasePopupHandler}></div>
+            <div className="popup-container" onClick={ hideBriefcasePopupHandler}></div>
             <div className="popup popup_briefcase">
-                <a href="#" className='btn-close-popup' onClick={ props.hideBriefcasePopupHandler}>
+                <a href="#" className='btn-close-popup' onClick={ hideBriefcasePopupHandler}>
                     <FontAwesomeIcon icon={faTimes}/>
                 </a>
+
                 <div><b>Your briefcases:</b></div>
 
-                <div className="briefcase-item flex-between">
-                    <span>Bitcoin (BTC)</span>
-                    <button className='btn-remove'>
-                        <FontAwesomeIcon icon={faTrashAlt}/>
-                    </button>
-                </div>
-                <div className="briefcase-item flex-between">
-                    <span>Ethereum (ETH)</span>
-                    <button className='btn-remove'>
-                        <FontAwesomeIcon icon={faTrashAlt}/>
-                    </button>
-                </div>
-                <div className="briefcase-item flex-between">
-                    <span>XRP (XRP)</span>
-                    <button className='btn-remove'>
-                        <FontAwesomeIcon icon={faTrashAlt}/>
-                    </button>
-                </div>
+                {briefcaseItems}
             </div>
         </>
     )

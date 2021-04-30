@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from 'react';
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Popup.scss'
 import {Button} from "react-bootstrap";
-import currencies from "../../store/reducers/currencies";
+
 interface PopupBriefCaseProps {
     hideBriefcasePopupHandler: (e:  React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => void;
     selectedBriefCase: number;
     currencies:  [];
     briefcaseHandler: IFormatter
 }
+
 interface IFormatter {
-    (currencyItem: object, inputValue : number | string): void;
+    (currencyName: string | number, inputValue : number | string): void;
 };
+
 export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcasePopupHandler, selectedBriefCase, currencies, briefcaseHandler}) => {
 
     interface currencyTypes{
@@ -47,11 +48,11 @@ export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcaseP
     useEffect(() => {
 
         setCurrencyItem(currencies[selectedBriefCase])
-        console.log(currencyItem)
+        console.log(currencyItem.id)
         setCurrencyName(currencyItem.id)
 
 
-    }, []);
+    } );
 
     const [inputValue, setInputValue] = useState<string | number>('')
 
@@ -84,7 +85,7 @@ export const PopupAddBriefCase: React.FC<PopupBriefCaseProps> = ({hideBriefcaseP
                     </div>
 
                     <Button
-                        onClick={() => briefcaseHandler(currencyItem, inputValue)}
+                        onClick={() => briefcaseHandler(currencyName, inputValue)}
                         variant="info" size="lg" active
                     >
                         +ADD

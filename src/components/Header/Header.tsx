@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import './Header.scss'
 import {NavLink} from "react-router-dom";
 import axios from "axios";
-import {addCurrency} from "../../store/actions/actionCreater";
+import {addCurrency} from "../../store/actions/actionCurrencyCreater";
 
 interface headerProps {
     currencies: [] | any

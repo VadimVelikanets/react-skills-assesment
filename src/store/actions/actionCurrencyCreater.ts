@@ -10,3 +10,4 @@ export const addCurrency = (currencies: any): TaskCurrencyTypes => ({
         ...currencies
     },
 });
+
