@@ -101,8 +101,6 @@ const App: React.FC = () => {
                     <span className='briefcase-count'>{briefcases && briefcases.length}</span>
                 </a>
             </main>
-
-
          <Footer/>
     </Router>
     </div>
