@@ -1,6 +1,0 @@
-export const ADD_CURRENCY = 'ADD_CURRENCY';
-
-export const ADD_BRIEFCASE = 'ADD_BRIEFCASE';
-
-export const DELETE_BRIEFCASE = 'DELETE_BRIEFCASE';
-
